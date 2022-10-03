@@ -8,11 +8,11 @@ public class MoodAnalyserTest {
     static MoodAnalyser checkMessage = new MoodAnalyser();
     @Test
     public void givenMesaageWhenSadShouldreturnSad() {
-        Assert.assertEquals("SAD", checkMessage.analyseMood("I am in sad mood"));
+        Assert.assertEquals("SAD", checkMessage.analyseMood());
     }
     @Test
     public void givenMessageWhennotSadShouldReturnHappy() {
-        Assert.assertEquals("HAPPY", checkMessage.analyseMood("I am in any mood"));
+        Assert.assertEquals("HAPPY", checkMessage.analyseMood());
     }
    
 }
