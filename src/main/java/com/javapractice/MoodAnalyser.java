@@ -14,9 +14,11 @@ public class MoodAnalyser {
     public MoodAnalyser() {
     }
 
-    public String analyseMood() {
+    public String analyseMood() throws MoodAnalyserException {
         log.info("Welcome to Mood Analyser Program!");
         try {
+            if (message.isEmpty())
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, "Please enter proper message");
             if (message.contains("sad"))
                 return "SAD";
             return "HAPPY";
@@ -28,7 +30,11 @@ public class MoodAnalyser {
     public static void main(String[] args) {
         String message = "I am in sad mood";
         MoodAnalyser analyser = new MoodAnalyser(message);
+        try {
         String mood = analyser.analyseMood();
         log.info("Mood is " + mood);
+        } catch (Exception e) {
+          log.info("exception is: "+e);
+        }
     }
 }
