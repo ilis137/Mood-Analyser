@@ -1,26 +1,36 @@
 package com.javapractice;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.Assert;
 
 
 public class MoodAnalyserTest {
-     MoodAnalyser checkMessage1 = new MoodAnalyser("I am in sad mood");
+  
+    static String mood = null;
     @Test
-    public void givenMesaageWhenSadShouldreturnSad() {
-        Assert.assertEquals("SAD", checkMessage1.analyseMood());
+    public void givenMessage_whenNull_ShouldThrowException() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+        try {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(MoodAnalyserException.class);
+            mood = moodAnalyser.analyseMood();
+            Assert.assertEquals("HAPPY",mood);
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.type);
+        }
     }
-    MoodAnalyser checkMessage2 = new MoodAnalyser("I am in happy mood");
 
     @Test
-    public void givenMessageWhennotSadShouldReturnHappy() {
-        Assert.assertEquals("HAPPY", checkMessage2.analyseMood());
-    }
-    
-    MoodAnalyser checkMessage3 = new MoodAnalyser(null);
-
-    @Test
-    public void givenNullMessageReturnHappy() {
-        Assert.assertEquals("HAPPY", checkMessage3.analyseMood());
+    public void givenMessage_whenEmpty_ShouldThrowException() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("");
+        try {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(MoodAnalyserException.class);
+            mood = moodAnalyser.analyseMood();
+            Assert.assertEquals("HAPPY",mood);
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
+        }
     }
 }
