@@ -7,8 +7,18 @@ import org.apache.logging.log4j.Logger;
 public class MoodAnalyser 
 {
     private static final Logger log = LogManager.getLogger(MoodAnalyser.class);
+
+    public String analyseMood(String message) {
+    log.info("Welcome to Mood Analyser Program!");
+	if (message.contains("sad"))
+            return "SAD";
+        return "HAPPY";
+    }
     public static void main( String[] args )
-    {
-        System.out.println( "Welcome to Mood Analyser Program!" );
+    {   
+        String message="I am in sad mood";
+        MoodAnalyser analyser=new MoodAnalyser();
+        String mood=analyser.analyseMood(message);
+        log.info("Mood is "+mood);
     }
 }
